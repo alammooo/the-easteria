@@ -5,8 +5,8 @@ import Toastify from "toastify-js"
 export const useCounterStore = defineStore("counter", {
   state() {
     return {
-      // baseUrl: "https://foodea-api-production.up.railway.app",
-      baseUrl: "http://localhost:3000",
+      baseUrl: "https://restaurant-server.indonesienkaffee.com/",
+      // baseUrl: "http://localhost:3000",
       count: 0,
       name: "",
       foodList: [],

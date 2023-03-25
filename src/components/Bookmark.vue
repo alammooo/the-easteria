@@ -3,6 +3,7 @@ import Loader from "./Loader.vue"
 import { mapActions, mapState, mapWritableState } from "pinia"
 import { useCounterStore } from "../stores/store"
 import FoodCard from "./FoodCard.vue"
+import bookmarkBg from "../assets/images/bookmark-bg.jpg"
 
 export default {
   components: {
@@ -29,7 +30,7 @@ export default {
     <div
       id="Food-List"
       class="bg-cover"
-      style="background-image: url('../src/assets/images/bookmark-bg.jpg')">
+      style="background-image: url('../assets/images/bookmark-bg.jpg')">
       <div
         class="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0 backdrop-brightness-50">
         <h1 class="text-center text-6xl my-3 font-serif">Your Favorite</h1>
