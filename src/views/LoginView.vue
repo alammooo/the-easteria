@@ -77,16 +77,6 @@ export default {
                 class="w-full bg-amber-200 text-sky-900 focus:ring-4 focus:outline-none focus:ring-sky-900 font-medium rounded-md px-5 py-2.5 text-center active:scale-95 duration-200">
                 Sign in
               </button>
-              <!-- <div
-                role="status"
-                class="w-full bg-amber-200 text-sky-900 focus:ring-4 focus:outline-none focus:ring-sky-900 font-medium rounded-md px-5 py-2.5 active:scale-95 duration-200 flex justify-center"
-                v-else>
-                <Spinner />
-              </div> -->
-
-              <div class="flex justify-center">
-                <GoogleLogin :callback="googleSignInOnLoad" />
-              </div>
               <p class="font-light text-amber-50">
                 Don’t have an account yet?
                 <a

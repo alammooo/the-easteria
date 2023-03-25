@@ -10,6 +10,7 @@ export default {
       password: "",
       phoneNumber: "",
       address: "",
+      registerBg: { backgroundImage: `url(${frontBg})` },
     }
   },
   methods: {
@@ -23,7 +24,7 @@ export default {
 <template>
   <section>
     <div
-      :style="{ backgroundImage: `url(${frontBg})` }"
+      :style="registerBg"
       class="bg-cover">
       <div
         class="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0 backdrop-brightness-50">

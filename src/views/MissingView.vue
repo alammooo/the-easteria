@@ -1,6 +1,11 @@
 <script>
 import notFoundBg from "@/assets/images/notfound-bg.jpg"
 export default {
+  data() {
+    return {
+      errorImg: { backgroundImage: `url(${notFoundBg})` },
+    }
+  },
   methods: {
     navHome() {
       this.$router.replace("/")
@@ -11,7 +16,7 @@ export default {
 <template>
   <section class="mainPage snap-y">
     <div
-      :style="{ backgroundImage: `url(${notFoundBg})` }"
+      :style="errorImg"
       class="bg-cover">
       <div
         class="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0 backdrop-brightness-50 backdrop:contrast-50 backdrop-blur-sm snap-start">

@@ -48,24 +48,6 @@ export const useCounterStore = defineStore("counter", {
       }).showToast()
     },
     /* Register & Login */
-    async googleSignInOnLoad(response) {
-      try {
-        const { credential } = response
-        const googleToken = await axios({
-          method: "POST",
-          url: `${this.baseUrl}/pub/google-login`,
-          headers: { "google-oauth-token": credential },
-        })
-        localStorage.setItem("access_token", googleToken.data.access_token)
-
-        this.fetchFood()
-        this.isLoggedIn = true
-        this.openToast(googleToken.data.message)
-        this.router.push("/")
-      } catch (error) {
-        this.openToast(error.response.data.message)
-      }
-    },
 
     async register(body) {
       try {
@@ -242,13 +224,13 @@ export const useCounterStore = defineStore("counter", {
       }
     },
 
-    /* API QR Code */
-    async fetchQrCode() {
-      const { data } = await axios({
-        method: "GET",
-        url: `https://api.happi.dev/v1/qrcode?data=${window.location.href}&width=&dots=000000&bg=FFFFFF&apikey=9b1b9dMpGZkGDgFC5GuLMeERGg9lupGNwyjzlaIcwy7Xqvbuc4HXQ7J5`,
-      })
-      this.qrCode = data
-    },
+    // /* API QR Code */
+    // async fetchQrCode() {
+    //   const { data } = await axios({
+    //     method: "GET",
+    //     url: `https://api.happi.dev/v1/qrcode?data=${window.location.href}&width=&dots=000000&bg=FFFFFF&apikey=9b1b9dMpGZkGDgFC5GuLMeERGg9lupGNwyjzlaIcwy7Xqvbuc4HXQ7J5`,
+    //   })
+    //   this.qrCode = data
+    // },
   },
 })
