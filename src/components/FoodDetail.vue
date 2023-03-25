@@ -3,8 +3,13 @@ import { mapActions, mapState, mapWritableState } from "pinia"
 import { useCounterStore } from "../stores/store"
 import Loader from "./Loader.vue"
 import MissingView from "../views/MissingView.vue"
-
+import foodDetailsBg from "@/assets/images/food-details.jpg"
 export default {
+  data() {
+    return {
+      foodDetailImage: { backgroundImage: `url(${foodDetailsBg})` },
+    }
+  },
   components: {
     Loader,
     MissingView,
@@ -15,10 +20,6 @@ export default {
       "addBookmark",
       "fetchQrCode",
     ]),
-    getBackgroundClass() {
-      const imageUrl = require("@/assets/images/food-details.jpg")
-      return `bg-url(${imageUrl})`
-    },
   },
   computed: {
     ...mapWritableState(useCounterStore, ["foodDetail", "qrCode", "isLoading"]),
@@ -39,7 +40,7 @@ export default {
   <section class="food-details overflow-hidden">
     <div
       class="bg-cover"
-      :class="getBackgroundClass()">
+      :style="foodDetailImage">
       <Loader
         v-if="isLoading"
         class="h-screen flex flex-col items-center justify-center" />

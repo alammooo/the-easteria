@@ -26,7 +26,7 @@ export default {
 }
 </script>
 <template>
-  <nav class="px-2 sm:px-4 fixed w-full z-20 top-0 left-0 backdrop-blur-md">
+  <nav class="px-2 sm:px-4 fixed w-full z-20 top-0 left-0 backdrop-blur-sm">
     <div class="container flex flex-wrap items-center justify-between mx-auto">
       <a class="flex items-center" @click.prevent="navHome">
         <span class="text-amber-50 hover:text-amber-300 text-2xl cursor-pointer active:scale-90 duration-200"

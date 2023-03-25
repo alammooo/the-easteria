@@ -1,16 +1,17 @@
 <script>
+import notFoundBg from "@/assets/images/notfound-bg.jpg"
 export default {
-  methods:{
-    navHome(){
+  methods: {
+    navHome() {
       this.$router.replace("/")
-    }
-  }
+    },
+  },
 }
 </script>
 <template>
   <section class="mainPage snap-y">
     <div
-      style="background-image: url('../src/assets/images/notfound-bg.jpg')"
+      :style="{ backgroundImage: `url(${notFoundBg})` }"
       class="bg-cover">
       <div
         class="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0 backdrop-brightness-50 backdrop:contrast-50 backdrop-blur-sm snap-start">
@@ -21,13 +22,15 @@ export default {
           Eastern
         </a>
         <h5 class="text-xl">
-          Bringin the strong tasty eastern spices directly to build strongest flavour
+          Bringin the strong tasty eastern spices directly to build strongest
+          flavour
         </h5>
         <a
           class="mt-7 text-3xl font-serif border-y-2 border-amber-200 py-7 px-5 cursor-pointer"
           >Sorry Page You requested is not Found</a
         >
-        <a @click.prevent="navHome()"
+        <a
+          @click.prevent="navHome()"
           class="mt-7 text-3xl font-serif py-7 px-5 active:scale-90 duration-200 cursor-pointer"
           >Back to Home</a
         >

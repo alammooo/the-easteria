@@ -3,8 +3,16 @@ import { mapActions, mapState, mapWritableState } from "pinia"
 import { useCounterStore } from "../stores/store"
 import FoodCard from "../components/FoodCard.vue"
 import Pagination from "../components/Pagination.vue"
+import frontBackground from "@/assets/images/front-bg.jpg"
+import foodBackground from "@/assets/images/bg-1.jpg"
 
 export default {
+  data() {
+    return {
+      foodImage: { backgroundImage: `url(${foodBackground})` },
+      frontImage: { backgroundImage: `url(${frontBackground})` },
+    }
+  },
   components: {
     FoodCard,
     Pagination,
@@ -21,14 +29,6 @@ export default {
       this.filter = categoryId
       this.fetchFood()
     },
-    getBackgroundClass() {
-      const imageUrl = require("@/assets/images/front-bg.jpg")
-      return `bg-url(${imageUrl})`
-    },
-    getBackgroundFood() {
-      const imageUrl = require("@/assets/images/bg-1.jpg")
-      return `bg-url(${imageUrl})`
-    },
   },
   computed: {
     ...mapWritableState(useCounterStore, [
@@ -44,9 +44,9 @@ export default {
 
 <template>
   <section class="mainPage">
-    <div class="snap-y snap-mandatory h-screen w-screen">
+    <div class="snap-y snap-mandatory h-screen">
       <div
-        :class="getBackgroundClass()"
+        :style="frontImage"
         class="bg-cover snap-start h-screen">
         <div
           class="flex flex-col items-center justify-center px-6 py-8 mx-auto h-screen lg:py-0 backdrop-brightness-50">
@@ -69,18 +69,18 @@ export default {
       </div>
       <div
         id="Food-List"
-        class="bg-cover snap-start h-screen"
-        :class="getBackgroundFood()">
+        class="bg-cover h-screen"
+        :style="foodImage">
         <div
-          class="flex flex-col items-center justify-center px-6 py-8 mx-auto h-screen lg:py-0 backdrop-brightness-50 backdrop-blur-sm">
+          class="flex flex-col items-center justify-center mx-auto h-screen lg:py-0 backdrop-brightness-50">
           <h1
-            class="text-center text-5xl my-3 font-serif border-b-2 border-amber-200">
-            Our Menu
+            class="block mt-16 text-center text-4xl font-serif border-b-2 border-amber-200">
+            Menu
           </h1>
-          <h1 class="text-center text-3xl my-3 font-light">Categories :</h1>
+          <h1 class="text-center text-xl my-3 font-light">Categories :</h1>
           <div class="flex gap-5">
             <a
-              class="text-center text-xl font-light cursor-pointer hover:text-amber-200 active:scale-90 duration-200"
+              class="text-center text-lg font-light cursor-pointer hover:text-amber-200 active:scale-90 duration-200"
               v-for="category in categoryList"
               :key="category.id"
               @click.prevent="logger(category.id)">
@@ -88,13 +88,13 @@ export default {
             </a>
             <a
               @click.prevent="logger(undefined)"
-              class="text-center text-xl font-light cursor-pointer hover:text-amber-200">
+              class="text-center text-lg font-light cursor-pointer hover:text-amber-200">
               All
             </a>
           </div>
 
           <div
-            class="grid-cols-4 grid gap-2 my-6 mx-auto duration-500 hover:gap-x-11">
+            class="grid-cols-4 grid gap-5 my-6 mx-auto">
             <FoodCard
               v-for="(food, index) in foodList"
               :key="food.id"

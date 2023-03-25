@@ -37,14 +37,15 @@ export default {
       "isFood",
     ]),
   },
-
 }
 </script>
 
 <template>
-  <div class="container rounded-md border border-stone-500 shadow-xl">
+  <div class="rounded-lg overflow-hidden border border-stone-600 shadow group ">
     <Loader v-if="isLoading" />
-    <div class="max-w-md overflow-hidden h-52 relative" v-else>
+    <div
+      class="max-w-md overflow-hidden h-52 relative"
+      v-else>
       <img
         @click.prevent="foodDetail()"
         class="object-cover w-full h-full cursor-pointer"
@@ -52,21 +53,20 @@ export default {
         :alt="food.name" />
       <button
         :class="isFood === true ? block : hidden"
-        class="border px-5 hover:bg-amber-100 text-lg text-sky-900 bg-amber-50 bg-opacity-80 rounded-sm backdrop-blur-lg absolute top-0 active:scale-95 duration-150"
+        class="px-5 hover:bg-amber-100 text-base text-sky-900 bg-amber-200 bg-opacity-80 rounded-sm absolute top-0 active:scale-95 duration-150"
         @click.prevent="addBookmark(food.id)">
         Bookmark!
       </button>
     </div>
-    <div class="p-5 flex justify-between">
-      <h1 class="font-medium text-xl">{{ food.name }}</h1>
-      <a>
-        <h5 class="text-2xl text-center tracking-wider text-amber-100">
-          {{ foodPrice }}
-        </h5>
-      </a>
+    <div class="p-3 flex justify-between group rounded-sm overflow-hidden group-hover:bg-amber-200 group-hover:text-sky-900 duration-200">
+      <h1 class="font-medium text-lg">{{ food.name }}</h1>
+      <h5 class="text-lg text-center tracking-wider text-amber-100 group-hover:text-sky-900">
+        {{ foodPrice }}
+      </h5>
+
       <button
-        v-if="(isFood === false)"
-        class="px-2 hover:bg-red-400 text-lg text-sky-50 bg-red-500 rounded-sm backdrop-blur-lg active:scale-95 duration-150"
+        v-if="isFood === false"
+        class="px-2 hover:bg-red-400 text-base text-sky-50 bg-red-500 rounded-sm active:scale-95 duration-150"
         @click.prevent="deleteBookmark(food.id)">
         Delete
       </button>

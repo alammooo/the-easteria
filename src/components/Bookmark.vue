@@ -6,6 +6,11 @@ import FoodCard from "./FoodCard.vue"
 import bookmarkBg from "../assets/images/bookmark-bg.jpg"
 
 export default {
+  data() {
+    return {
+      bookmarkBackground: { backgroundImage: `url(${bookmarkBg})` },
+    }
+  },
   components: {
     Loader,
     FoodCard,
@@ -19,10 +24,6 @@ export default {
       this.$router.push(`foods/${foodId}`)
     },
     ...mapActions(useCounterStore, ["fetchBookmark", "deleteBookmark"]),
-    getBackgroundClass() {
-      const imageUrl = require("@/assets/images/bookmark-bg.jpg")
-      return `bg-url(${imageUrl})`
-    },
   },
   computed: {
     ...mapWritableState(useCounterStore, [
@@ -39,7 +40,7 @@ export default {
     <div
       id="Food-List"
       class="bg-cover"
-      :class="getBackgroundClass()">
+      :style="bookmarkBackground">
       <div
         class="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0 backdrop-brightness-50">
         <h1 class="text-center text-6xl my-3 font-serif">Your Favorite</h1>

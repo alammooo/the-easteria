@@ -3,16 +3,17 @@ import { mapActions, mapStores, mapWritableState } from "pinia"
 import { useCounterStore } from "../stores/store"
 import Loader from "../components/Loader.vue"
 import Spinner from "../components/Spinner.vue"
-
+import frontBg from "@/assets/images/front-bg.jpg"
 export default {
   components: {
     Loader,
-    Spinner
+    Spinner,
   },
   data() {
     return {
       email: "",
       password: "",
+      frontImage: { backgroundImage: `url(${frontBg})` },
     }
   },
   methods: {
@@ -29,11 +30,13 @@ export default {
 <template>
   <section>
     <div
-      style="background-image: url('../src/assets/images/front-bg.jpg')"
+      :style="frontImage"
       class="bg-cover">
       <div
         class="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0 backdrop-brightness-50">
-        <a href="#" class="flex items-center mb-6 text-4xl font-serif text-amber-50">
+        <a
+          href="#"
+          class="flex items-center mb-6 text-4xl font-serif text-amber-50">
           Easteria Restaurant Login
         </a>
         <div class="w-full rounded-sm shadow md:mt-0 sm:max-w-md xl:p-0 border">
