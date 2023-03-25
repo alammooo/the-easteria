@@ -21,6 +21,14 @@ export default {
       this.filter = categoryId
       this.fetchFood()
     },
+    getBackgroundClass() {
+      const imageUrl = require("@/assets/images/front-bg.jpg")
+      return `bg-url(${imageUrl})`
+    },
+    getBackgroundFood() {
+      const imageUrl = require("@/assets/images/bg-1.jpg")
+      return `bg-url(${imageUrl})`
+    },
   },
   computed: {
     ...mapWritableState(useCounterStore, [
@@ -38,7 +46,7 @@ export default {
   <section class="mainPage">
     <div class="snap-y snap-mandatory h-screen w-screen">
       <div
-        style="background-image: url('../src/assets/images/front-bg.jpg')"
+        :class="getBackgroundClass()"
         class="bg-cover snap-start h-screen">
         <div
           class="flex flex-col items-center justify-center px-6 py-8 mx-auto h-screen lg:py-0 backdrop-brightness-50">
@@ -62,7 +70,7 @@ export default {
       <div
         id="Food-List"
         class="bg-cover snap-start h-screen"
-        style="background-image: url('../src/assets/images/bg-1.jpg')">
+        :class="getBackgroundFood()">
         <div
           class="flex flex-col items-center justify-center px-6 py-8 mx-auto h-screen lg:py-0 backdrop-brightness-50 backdrop-blur-sm">
           <h1

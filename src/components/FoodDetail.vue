@@ -10,7 +10,15 @@ export default {
     MissingView,
   },
   methods: {
-    ...mapActions(useCounterStore, ["fetchFoodById", "addBookmark", "fetchQrCode"]),
+    ...mapActions(useCounterStore, [
+      "fetchFoodById",
+      "addBookmark",
+      "fetchQrCode",
+    ]),
+    getBackgroundClass() {
+      const imageUrl = require("@/assets/images/food-details.jpg")
+      return `bg-url(${imageUrl})`
+    },
   },
   computed: {
     ...mapWritableState(useCounterStore, ["foodDetail", "qrCode", "isLoading"]),
@@ -31,7 +39,7 @@ export default {
   <section class="food-details overflow-hidden">
     <div
       class="bg-cover"
-      style="background-image: url('../src/assets/images/food-details.jpg')">
+      :class="getBackgroundClass()">
       <Loader
         v-if="isLoading"
         class="h-screen flex flex-col items-center justify-center" />
@@ -61,7 +69,10 @@ export default {
               class="text-xl border px-5 py-2 mb-5 rounded-sm cursor-pointer hover:bg-amber-50 hover:text-sky-900 duration-200 active:scale-90">
               Add to Bookmark!
             </button>
-            <img :src="qrCode.qrcode" alt="" class="h-52" />
+            <img
+              :src="qrCode.qrcode"
+              alt=""
+              class="h-52" />
           </div>
         </div>
       </div>

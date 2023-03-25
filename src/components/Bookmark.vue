@@ -19,9 +19,18 @@ export default {
       this.$router.push(`foods/${foodId}`)
     },
     ...mapActions(useCounterStore, ["fetchBookmark", "deleteBookmark"]),
+    getBackgroundClass() {
+      const imageUrl = require("@/assets/images/bookmark-bg.jpg")
+      return `bg-url(${imageUrl})`
+    },
   },
   computed: {
-    ...mapWritableState(useCounterStore, ["bookmarkList", "isLoading", "isFood", "isSpinner"]),
+    ...mapWritableState(useCounterStore, [
+      "bookmarkList",
+      "isLoading",
+      "isFood",
+      "isSpinner",
+    ]),
   },
 }
 </script>
@@ -30,12 +39,14 @@ export default {
     <div
       id="Food-List"
       class="bg-cover"
-      style="background-image: url('../assets/images/bookmark-bg.jpg')">
+      :class="getBackgroundClass()">
       <div
         class="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0 backdrop-brightness-50">
         <h1 class="text-center text-6xl my-3 font-serif">Your Favorite</h1>
         <h1 class="text-center text-4xl my-3 font-light">Bookmarks :</h1>
-        <h1 class="text-center text-xl my-3" v-if="bookmarkList.length === 0">
+        <h1
+          class="text-center text-xl my-3"
+          v-if="bookmarkList.length === 0">
           Bookmark is Empty
         </h1>
         <Loader v-else-if="isLoading" />
@@ -46,7 +57,9 @@ export default {
             class="max-w-md overflow-hidden h-80 relative"
             v-for="bookmark in bookmarkList"
             :key="bookmark.id">
-            <FoodCard :food="bookmark.Food" :isFood="isFood"/>
+            <FoodCard
+              :food="bookmark.Food"
+              :isFood="isFood" />
             <!-- <img
               @click.prevent="foodDetail(bookmark.FoodId)"
               class="object-cover w-full h-full cursor-pointer"
