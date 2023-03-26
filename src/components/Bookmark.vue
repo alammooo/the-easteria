@@ -61,16 +61,6 @@ export default {
             <FoodCard
               :food="bookmark.Food"
               :isFood="isFood" />
-            <!-- <img
-              @click.prevent="foodDetail(bookmark.FoodId)"
-              class="object-cover w-full h-full cursor-pointer"
-              :src="bookmark.Food.imgUrl"
-              :alt="bookmark.Food.name" />
-            <a
-              class="bg-red-400 px-5 py-1 text-lg z-20 absolute bottom-0 cursor-pointer select-none active:scale-95 duration-200"
-              @click="deleteBookmark(bookmark.FoodId)"
-              >Delete</a
-            > -->
           </div>
         </div>
       </div>

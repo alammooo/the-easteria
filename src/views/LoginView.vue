@@ -20,7 +20,7 @@ export default {
     navRegister() {
       this.$router.replace(`/register`)
     },
-    ...mapActions(useCounterStore, ["login", "googleSignInOnLoad"]),
+    ...mapActions(useCounterStore, ["login"]),
   },
   computed: {
     ...mapWritableState(useCounterStore, ["isLoading"]),

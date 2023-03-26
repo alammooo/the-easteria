@@ -10,10 +10,7 @@ export default {
     navLogin() {
       this.$router.push("/login")
     },
-    navHome() {
-      this.$router.push("/")
-    },
-    ...mapActions(useCounterStore, ["logout"]),
+    ...mapActions(useCounterStore, ["logout", "navHome"]),
   },
   computed: {
     ...mapWritableState(useCounterStore, ["isLoggedIn"]),
@@ -28,7 +25,7 @@ export default {
 <template>
   <nav class="px-2 sm:px-4 fixed w-full z-20 top-0 left-0 backdrop-blur-sm">
     <div class="container flex flex-wrap items-center justify-between mx-auto">
-      <a class="flex items-center" @click.prevent="navHome">
+      <a class="flex items-center" @click.prevent="navHome()">
         <span class="text-amber-50 hover:text-amber-300 text-2xl cursor-pointer active:scale-90 duration-200"
           >Easteria <br />
           <span class="font-serif">Restaurant</span></span

@@ -36,12 +36,12 @@ const router = createRouter({
     {
       path: "/foods/:id",
       name: "foodDetail",
-      component: () => import("../components/FoodDetail.vue"),
+      component: () => import("@/components/FoodDetail.vue"),
     },
     {
       path: "/bookmarks",
       name: "bookmarkList",
-      component: () => import("../components/Bookmark.vue"),
+      component: () => import("@/components/Bookmark.vue"),
     },
     {
       path: "/:pathMatch(.*)*",
@@ -51,7 +51,7 @@ const router = createRouter({
   ],
 })
 
-router.beforeEach(function (to, from, next) {
+router.beforeEach((to, from, next) => {
   const isAuthenticated = localStorage.getItem("access_token")
   if (to.name === "bookmarkList" && !isAuthenticated) next({ name: "login" })
   if ((to.name === "register" || to.name === "login") && isAuthenticated)

@@ -7,7 +7,6 @@ export const useCounterStore = defineStore("counter", {
     return {
       baseUrl: "https://restaurant-server.indonesienkaffee.com",
 
-      
       // baseUrl: "http://localhost:3000",
       count: 0,
       name: "",
@@ -31,6 +30,12 @@ export const useCounterStore = defineStore("counter", {
   },
   getters: {},
   actions: {
+    navHome(){
+      this.currentPage = 1
+      this.filter = ""
+      this.fetchFood()
+      this.router.replace("/")
+    },
     openToast(message) {
       Toastify({
         text: message,
@@ -69,17 +74,17 @@ export const useCounterStore = defineStore("counter", {
     async login(body) {
       try {
         this.isLoading = true
-        const { data } = await axios({
+        const response = await axios({
           method: "POST",
           url: `${this.baseUrl}/pub/login`,
           data: body,
         })
-        localStorage.setItem("access_token", data.access_token)
+        localStorage.setItem("access_token", response.data.access_token)
         this.isLoggedIn = true
         this.router.push("/")
         this.openToast("Successfully logged in")
       } catch (error) {
-        this.openToast(error.response.data.message)
+        this.openToast(error.response.data?.message)
       } finally {
         this.isSpinner = false
         this.isLoading = false
@@ -122,44 +127,46 @@ export const useCounterStore = defineStore("counter", {
           this.totalFood = Number(data.totalFood)
           this.limit = data.limit
           this.isFood = true
-          this.isLoading = false
         }
       } catch (error) {
         this.openToast(error.response.data.message)
+      } finally {
+        this.isLoading = false
       }
     },
-    async fetchFoodById(id) {
+    async fetchFoodById(foodId) {
       try {
         this.isLoading = true
-        const { data } = await axios({
+        const response = await axios({
           method: "GET",
-          url: `${this.baseUrl}/pub/foods/${id}`,
+          url: `${this.baseUrl}/pub/foods/${foodId}`,
         })
+        const { data } = response
         this.foodDetail = data.food
-        this.isLoading = false
       } catch (error) {
         this.router.replace("/foods/notFound-foods")
+      } finally {
+        this.isLoading = false
       }
     },
     async fetchBookmark() {
       try {
         this.isLoading = true
         this.card = "Bookmark"
-        const { data } = await axios({
+        const response = await axios({
           method: "GET",
           url: `${this.baseUrl}/pub/bookmarks`,
           headers: {
             access_token: localStorage.getItem("access_token"),
           },
         })
+
         this.isFood = false
-        this.isSpinner = false
-        this.isLoading = false
-        this.bookmarkList = data.BookmarkList
+        this.bookmarkList = response.data.BookmarkList
       } catch (error) {
-        this.isSpinner = false
         this.openToast(error.response.data.message)
       } finally {
+        this.isLoading = false
         this.isSpinner = false
       }
     },
@@ -182,16 +189,17 @@ export const useCounterStore = defineStore("counter", {
     },
 
     /* Add or Delete */
-    async addBookmark(id) {
+    async addBookmark(foodId) {
       try {
         this.isSpinner = true
-        const { data } = await axios({
+        const response = await axios({
           method: "POST",
-          url: `${this.baseUrl}/pub/bookmarks/${id}`,
+          url: `${this.baseUrl}/pub/bookmarks/${foodId}`,
           headers: {
             access_token: localStorage.access_token,
           },
         })
+
         this.openToast("Successfully add Bookmark")
       } catch (error) {
         this.isSpinner = false
@@ -206,15 +214,16 @@ export const useCounterStore = defineStore("counter", {
         this.isSpinner = false
       }
     },
-    async deleteBookmark(id) {
+    async deleteBookmark(foodId) {
       try {
-        await axios({
+        const response = await axios({
           method: "DELETE",
-          url: `${this.baseUrl}/pub/bookmarks/${id}`,
+          url: `${this.baseUrl}/pub/bookmarks/${foodId}`,
           headers: {
             access_token: localStorage.access_token,
           },
         })
+
         this.openToast("Successfully delete Bookmark")
         this.fetchBookmark()
         this.isSpinner = false
