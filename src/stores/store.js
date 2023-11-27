@@ -5,7 +5,7 @@ import Toastify from "toastify-js"
 export const useCounterStore = defineStore("counter", {
   state() {
     return {
-      baseUrl: "https://restaurant-server.indonesienkaffee.com",
+      baseUrl: "https://restaurant-server.klinik-ku.com",
 
       // baseUrl: "http://localhost:3000",
       count: 0,
